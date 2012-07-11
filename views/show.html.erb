@@ -1,0 +1,13 @@
+<table class="table table-bordered table-striped">
+  <tbody>
+    <% model_object.attributes.each do |attr, value| %>
+      <% next if value.blank? %>
+      <tr>
+        <td><%= attr.to_s.humanize %></td>
+        <td><%= model_object.send(attr) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_path(model_object), :class => 'btn' %>

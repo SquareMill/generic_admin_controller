@@ -1,0 +1,5 @@
+$('#model-table-loading').hide();
+$("#model-table").html("<%= escape_javascript render(custom_partial('model_table')) %>");
+$('#model-table').show();
+
+window.history.replaceState(null, null, window.location.pathname + "?<%= pushstate_params %>");
