@@ -1,0 +1,21 @@
+<% content_for :sidebar do %>
+    <h2><%= plural_name.titlecase %></h2>
+    <%= form_tag index_path,
+      :id => "model-search-form",
+      :remote => true,
+      'data-auto-submit' => true,
+      'data-loading-animation' => "#model-table",
+      :method => :get ,
+      :class => "well" do %>
+      <input type="text" name="search" class="input-medium search-query" placeholder="Search <%= plural_name.titlecase %>"></input>
+    <% end %>
+    <%= link_to 'Create New', new_path %>
+<% end %>
+
+<div id="model-table-loading" class="loading-animation" style="display:none">
+  <%= render :partial => "loading" %>
+</div>
+
+<div id="model-table">
+  <%= render custom_partial("model_table") %>
+</div>

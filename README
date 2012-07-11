@@ -1,0 +1,60 @@
+Base Model
+==========
+
+Rails code for creating customizable CMS's.
+
+Expectations:
+
+# Your project is rails 3.1 and has kaminari, twitter bootstrap, simple form, jquery
+# Your project has a admin namespace and a base Admin::AdminController
+# Your models have attr_accessible ... :as => :admin
+# You use the simple form initializer to set up simple form bootstrap html structure
+
+Sample Controller Example
+=========================
+
+Routes
+
+    namespace :admin do
+      resources :messages
+    end
+
+Controller:
+
+    class Admin::MessagesController < Admin::BaseModelController
+      def model_class
+        Message
+      end
+
+      def index_columns
+        ['body','created_at']
+      end
+
+      def default_order
+        "created_at DESC"
+      end
+    end
+
+Overriding
+==========
+
+Override views by creating a view directory for the controller and placing a partial or view file in the directory (index/new/edit/_form etc.)
+Override controller methods by implementing them in the controller. For example to replace the search:
+
+    def search
+      query = User
+
+      unless params[:search].blank?
+        first_name, last_name = params[:search].split(/\s+/)
+        query = query.joins(:employer)
+        q = "%#{first_name.strip}%"
+        if first_name && last_name
+          query = query.where(["(users.first_name LIKE ? AND users.last_name LIKE ?) OR employers.name LIKE ?", q, "%#{last_name.strip}%", "%#{first_name} #{last_name}%"])
+        elsif first_name
+          query = query.where(["users.first_name LIKE ? OR users.last_name LIKE ? OR users.email LIKE ? OR employers.name LIKE ?", q, q, q, q])
+        end
+      end
+ 
+      query = query.page(params[:page]) if params[:format] != "csv"
+      @users = query.order(order_sql(params))
+    end

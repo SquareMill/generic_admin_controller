@@ -1,0 +1,27 @@
+<%= CSV.generate do |csv|
+  # Header row
+  csv << index_columns.collect {|name| name.is_a?(Array) ? name[0] : name.humanize }
+
+  # all other rows
+  instance_variable_get("@#{plural_name}").each do |model|
+    csv << index_columns.collect do |col_name|
+      if col_name.is_a?(Array)
+        col_name[1].call(model)
+      else
+        col = model.class.columns.find {|c| c.name == col_name || c.name.downcase == col_name.downcase }
+        if [:datetime, :date].include? col.type
+          model.send(col.name).strftime("%D %R") if model.send(col.name)
+        elsif [:string].include? col.type
+          model.send(col.name)
+        elsif col.name == "id"
+          model.id
+        elsif col.name =~ /_id$/
+          association = model.send(col.name.gsub("_id",''))
+          association.to_s
+        else
+          model.send(col.name)
+        end
+      end
+    end
+  end
+end %>
