@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = GenericAdminController::VERSION
 
-  gem.add_dependency "rails", "> 4.0.0.beta1"
+  gem.add_dependency "rails", ">= 4.0.0.beta1"
   gem.add_dependency "simple_form", "~> 3.0.0.beta1"
   gem.add_dependency "kaminari", "~> 0.14.1"
 
