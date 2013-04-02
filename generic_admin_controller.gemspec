@@ -16,11 +16,14 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
+  gem.required_ruby_version = '>= 1.9.3'
+
   gem.add_dependency "rails", ">= 4.0.0.beta1"
   gem.add_dependency "simple_form", "~> 3.0.0.beta1"
   gem.add_dependency "kaminari", "~> 0.14.1"
 
-  # Also required, but not sure if we can make them gem dependencies:
-  # bootstrap
-  # jquery
+  # Also required, but not sure if we can make them gem dependencies
+  gem.requirements << 'bootstrap'
+  gem.requirements << 'jquery'
+
 end
