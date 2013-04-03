@@ -64,7 +64,7 @@ class Admin::GenericAdminController < Admin::AdminController
 
   # POST /admin/<%= plural_name %>
   def create
-    model = instance_variable_set("@#{singular_name}", model_class.new(params[singular_name]))
+    model = instance_variable_set("@#{singular_name}", model_class.new(model_params))
     model.updated_by = current_user if model.respond_to?(:updated_by=)
 
     if model.save
@@ -81,7 +81,7 @@ class Admin::GenericAdminController < Admin::AdminController
     model = instance_variable_set("@#{singular_name}", model_class.find(params[:id]))
     model.updated_by = current_user if model.respond_to?(:updated_by=)
 
-    if model.update_attributes(params[singular_name])
+    if model.update_attributes(model_params)
       flash[:notice] = "#{singular_name} was successfully updated."
       redirect_to(redirect_on_edit(model))
       return
@@ -196,7 +196,19 @@ private
     model_class.columns.find_all {|col| [:string].include?(col.type) }.collect {|col| col.name }
   end
 
-  def singular_name; model_name.singularize; end
-  def plural_name; model_name.pluralize; end
-  def model_name; model_class.table_name; end
+  def singular_name
+    model_name.singularize
+  end
+
+  def plural_name
+    model_name.pluralize
+  end
+
+  def model_name
+    model_class.table_name
+  end
+
+  def model_params
+    params.require(singular_name).permit(model_class.column_names - ["id", "created_at", "updated_at"])
+  end
 end
