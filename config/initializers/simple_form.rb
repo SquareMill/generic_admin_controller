@@ -11,5 +11,6 @@ SimpleForm.setup do |config|
       ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
       ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
     end
+
   end
 end

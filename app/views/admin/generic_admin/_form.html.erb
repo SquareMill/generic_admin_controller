@@ -1,13 +1,19 @@
 <%= simple_form_for model_object, :html => {:class => "form-horizontal"}, :wrapper => :bootstrap, :url => model_object.new_record? ? index_path : model_path(model_object) do |f| %>
-  <% model_object.class.columns.each do |col| %>
-    <% next if col.name == "id" || col.name == "created_at" || col.name == "updated_at" %>
-    <% if [:datetime, :date].include? col.type -%>
-      <%= f.input col.name, :include_blank => true %>
-    <% else %>
-      <%= f.input col.name %>
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <% model_object.class.columns.each do |col| %>
+      <% next if col.name == "id" || col.name == "created_at" || col.name == "updated_at" %>
+      <% if [:datetime, :date].include? col.type -%>
+        <%= f.input col.name, :include_blank => true %>
+      <% else %>
+        <%= f.input col.name %>
+      <% end %>
     <% end %>
-  <% end %>
-  <div class="commit">
-    <%= f.button :submit %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn" %>
   </div>
 <% end %>
