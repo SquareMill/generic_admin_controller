@@ -41,7 +41,7 @@
         <td class="edit">
           <%= link_to '<i class="icon-zoom-in"></i>'.html_safe, model_path(model) %>
           <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_path(model) %>
-          <%= link_to '<i class="icon-trash"></i>'.html_safe, model_path(model), :method => :delete, :confirm => "Are you sure?" %>
+          <%= link_to '<i class="icon-trash"></i>'.html_safe, model_path(model), :method => :delete, :data => { :confirm => "Are you sure?" } %>
         </td>
       </tr>
     <% end -%>
