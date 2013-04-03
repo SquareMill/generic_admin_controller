@@ -4,7 +4,7 @@
 class Admin::GenericAdminController < Admin::AdminController
   helper_method :singular_name, :plural_name, :index_columns, :custom_partial
   helper_method :namespace, :new_path, :edit_path, :index_path, :model_path, :model_class, :model_object
-  helper_method :order_param
+  helper_method :order_param, :pushstate_params
 
   # GET /admin/<%= plural_name %>
   def index
@@ -28,7 +28,7 @@ class Admin::GenericAdminController < Admin::AdminController
 
   def search
     sql, sql_params = [], []
-    search_cols = search_columns.collect {|s| "`#{s}`"}
+    search_cols = search_columns
     search_cols.each do |col|
       sql << "#{model_class.table_name}.#{col} LIKE ?"
       sql_params << "%#{params[:search]}%"
@@ -179,6 +179,14 @@ private
     else
       default_order
     end
+  end
+
+  def pushstate_params
+    p = params.dup
+    p.delete(:action)
+    p.delete(:controller)
+    p.delete(:utf8)
+    p.to_query.html_safe
   end
 
   def index_columns
