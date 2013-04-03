@@ -27,13 +27,14 @@ class Admin::GenericAdminController < Admin::AdminController
   end
 
   def search
-    sql, sql_params = [], []
-    search_cols = search_columns
-    search_cols.each do |col|
-      sql << "#{model_class.table_name}.#{col} LIKE ?"
-      sql_params << "%#{params[:search]}%"
+    conditions = nil
+    search_columns.each do |col|
+      if conditions
+        conditions = conditions.or( model_class.arel_table[col].matches( "%#{params[:search]}%" ) )
+      else
+        conditions = model_class.arel_table[col].matches( "%#{params[:search]}%" )
+      end
     end
-    conditions = [sql.join(" OR "), sql_params].flatten
     query = model_class
     query = query.page(params[:page]) if params[:format] != "csv"
     query = query.where(conditions).order(order_sql(params))
