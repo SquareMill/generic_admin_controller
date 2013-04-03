@@ -8,7 +8,7 @@ class Admin::GenericAdminController < Admin::AdminController
 
   # GET /admin/<%= plural_name %>
   def index
-    if params[:search]
+    if params[:search].present?
       @query = params[:search]
       search
     else
