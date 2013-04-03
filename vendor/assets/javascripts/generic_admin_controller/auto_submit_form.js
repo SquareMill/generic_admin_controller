@@ -11,9 +11,13 @@ function bindAutoSubmitForms() {
     }
   }
 
-  function submitForm(form) {
+  function submitForm(form, timeout) {
     showLoading(form);
-    form.trigger('submit.rails');
+    timeout = timeout || 0;
+    clearTimeout(form.data('timeout'));
+    form.data('timeout', setTimeout(function() {
+      form.trigger('submit.rails');
+    }, timeout));
   }
 
   $(document).on('click', 'form[data-auto-submit="true"] input[type=radio], form[data-auto-submit="true"] input[type=checkbox]', function() {
@@ -29,11 +33,7 @@ function bindAutoSubmitForms() {
   // If this is an input text box then delay 200ms before submitting the form
   $(document).on('keyup', 'form[data-auto-submit="true"] input[type=search], form[data-auto-submit="true"] input[type=text]', function() {
     var form = $(this).closest('form');
-    showLoading(form);
-    clearTimeout(form.data('timeout'));
-    form.data('timeout', setTimeout(function() {
-      form.trigger('submit.rails');
-    }, 200));
+    submitForm(form, 200);
   });
 }
 
