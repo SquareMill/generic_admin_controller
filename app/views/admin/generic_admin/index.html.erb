@@ -7,7 +7,7 @@
       'data-loading-animation' => "#model-table",
       :method => :get ,
       :class => "well" do %>
-      <input type="text" name="search" class="input-medium search-query" placeholder="Search <%= plural_name.titlecase %>"></input>
+        <input type="text" name="search" class="input-medium search-query" placeholder="Search <%= plural_name.titlecase %>" value=<%= params[:search] %>></input>
     <% end %>
     <%= link_to 'Create New', new_path %>
 <% end %>
