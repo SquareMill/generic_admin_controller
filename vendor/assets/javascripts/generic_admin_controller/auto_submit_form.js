@@ -23,15 +23,11 @@ function bindAutoSubmitForms() {
   $(document).on('click', 'form[data-auto-submit="true"] input[type=radio], form[data-auto-submit="true"] input[type=checkbox]', function() {
     var form = $(this).closest('form');
     submitForm(form);
-  });
-
-  $(document).on('change', 'form[data-auto-submit="true"] select', function() {
+  }).on('change', 'form[data-auto-submit="true"] select', function() {
     var form = $(this).closest('form');
     submitForm(form);
-  })
-
-  // If this is an input text box then delay 200ms before submitting the form
-  $(document).on('keyup', 'form[data-auto-submit="true"] input[type=search], form[data-auto-submit="true"] input[type=text]', function() {
+  }).on('keyup', 'form[data-auto-submit="true"] input[type=search], form[data-auto-submit="true"] input[type=text]', function() {
+    // As this is an input text box then delay 200ms before submitting the form to wait for multiple key strokes
     var form = $(this).closest('form');
     submitForm(form, 200);
   });
