@@ -202,7 +202,8 @@ private
 
   def search_columns
     # By default searches all text fields
-    model_class.columns.find_all {|col| [:string].include?(col.type) }.collect {|col| col.name }
+    accepted_types = [:string, :text]
+    model_class.columns.find_all {|col| accepted_types.include?(col.type) }.collect {|col| col.name }
   end
 
   def singular_name
