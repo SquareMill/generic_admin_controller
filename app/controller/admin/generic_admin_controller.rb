@@ -64,7 +64,7 @@ class Admin::GenericAdminController < Admin::AdminController
 
   # POST /admin/<%= plural_name %>
   def create
-    model = instance_variable_set("@#{singular_name}", model_class.new(params[singular_name], :as => :admin))
+    model = instance_variable_set("@#{singular_name}", model_class.new(params[singular_name]))
     model.updated_by = current_user if model.respond_to?(:updated_by=)
 
     if model.save
@@ -81,7 +81,7 @@ class Admin::GenericAdminController < Admin::AdminController
     model = instance_variable_set("@#{singular_name}", model_class.find(params[:id]))
     model.updated_by = current_user if model.respond_to?(:updated_by=)
 
-    if model.update_attributes(params[singular_name], :as => :admin)
+    if model.update_attributes(params[singular_name])
       flash[:notice] = "#{singular_name} was successfully updated."
       redirect_to(redirect_on_edit(model))
       return
