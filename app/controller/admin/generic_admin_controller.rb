@@ -215,7 +215,7 @@ private
   end
 
   def model_name
-    model_class.table_name
+    model_class.name.underscore
   end
 
   def model_params

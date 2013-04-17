@@ -4,7 +4,7 @@
 
   <div class="form-inputs">
     <% model_object.class.columns.each do |col| %>
-      <% next if col.name == "id" || col.name == "created_at" || col.name == "updated_at" %>
+      <% next if col.name == "id" || col.name == "created_at" || col.name == "updated_at" || col.name == "type" %>
       <% if [:datetime, :date].include? col.type -%>
         <%= f.input col.name, :include_blank => true %>
       <% else %>
