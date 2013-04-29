@@ -219,6 +219,10 @@ private
   end
 
   def model_params
-    params.require(singular_name).permit(model_class.column_names - ["id", "created_at", "updated_at"])
+    params.require(singular_name).permit(permitted_params)
+  end
+
+  def permitted_params
+    model_class.column_names - ["id", "created_at", "updated_at"]
   end
 end
