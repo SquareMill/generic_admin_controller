@@ -24,8 +24,10 @@
           <% else %>
             <% col = model.class.columns.find {|c| c.name == col_name || c.name.downcase == col_name.downcase } %>
 
-            <% if [:datetime, :date].include? col.type -%>
-              <td><%= model.send(col.name).strftime("%D %R") if model.send(col.name) %></td>
+            <% if col.type == :datetime -%>
+              <td><%= model.send(col.name).strftime("%D %R %z") if model.send(col.name) %></td>
+            <% elsif col.type == :date -%>
+              <td><%= model.send(col.name).strftime("%D") if model.send(col.name) %></td>
             <% elsif [:string].include? col.type -%>
               <td><%= truncate(model.send(col.name), :length => 30) %></td>
             <% elsif col.name == "id" %>
