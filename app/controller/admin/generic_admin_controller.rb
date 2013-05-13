@@ -97,6 +97,9 @@ class Admin::GenericAdminController < Admin::AdminController
     model.updated_by = current_user if model.respond_to?(:updated_by=)
     model.destroy
 
+    if model.destroyed?
+      flash[:notice] = "#{singular_name} was successfully deleted."
+    end
     redirect_to(index_path)
   end
 
