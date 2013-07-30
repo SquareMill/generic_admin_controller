@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped">
+<table class="table">
   <tbody>
     <% model_object.attributes.each do |attr, value| %>
       <% next if value.blank? %>
@@ -9,5 +9,9 @@
     <% end %>
   </tbody>
 </table>
+
+<%= content_for :page_actions do %>
+  <%= link_to 'Edit', edit_path(model_object) %>
+<% end %>
 
 <%= link_to 'Edit', edit_path(model_object) %>

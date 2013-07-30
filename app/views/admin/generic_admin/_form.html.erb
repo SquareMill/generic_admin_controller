@@ -3,6 +3,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <fieldset>
     <% model_object.class.columns.each do |col| %>
       <% next if col.name == "id" || col.name == "created_at" || col.name == "updated_at" || col.name == "type" %>
       <% if [:datetime, :date].include? col.type -%>
@@ -11,9 +12,10 @@
         <%= f.input col.name %>
       <% end %>
     <% end %>
+    </fieldset>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, :class => "btn" %>
+    <%= f.button :submit, :class => "button secondary lg" %>
   </div>
 <% end %>
