@@ -37,7 +37,7 @@
               <% elsif col.type == :date -%>
                 <td><%= model.send(col.name).to_s(:admin) if model.send(col.name) %></td>
               <%# elsif thumb_columns.include?(col.name) %>
-                <!-- <td class="thumb"><%= image_tag(model.send(col.name)) if model.send(col.name) %></td> -->
+                <!-- <td class="thumb"><%#= image_tag(model.send(col.name)) if model.send(col.name) %></td> -->
               <% elsif [:string, :text].include? col.type -%>
                 <td><%= truncate(model.send(col.name), :length => 150) %></td>
               <% elsif col.name == "id" %>
