@@ -1,12 +1,12 @@
 # Generic Admin Controller
 
-Create customizable CMS's.
+Create simple and customizable CMS's on Rails 4 apps.
 
 Expectations:
 
-- Your project is Rails 4 and has [kaminari](https://github.com/amatsuda/kaminari), [simple_form](https://github.com/plataformatec/simple_form), twitter bootstrap, and jquery
-- Your project has a admin namespace and a base `Admin::AdminController`
-- You use the simple\_form initializer to set up simple\_form bootstrap html structure
+- Your project has Twitter Bootstrap 2 and jQuery 1.7+.
+- Your project has an admin namespace and a base `Admin::AdminController`.
+- You use the [simple_form](https://github.com/plataformatec/simple_form) initializer to set up simple\_form bootstrap html structure.
 
 ## Sample Controller Example
 
@@ -18,7 +18,7 @@ namespace :admin do
 end
 ```
 
-#### Controller
+### Controller
 
 ``` ruby
 class Admin::MessagesController < Admin::GenericAdminController
@@ -39,6 +39,7 @@ end
 ## Overriding
 
 Override views by creating a view directory for the controller and placing a partial or view file in the directory (`{index,new,edit,_form,_model_table}.html.erb` etc.)
+
 Override controller methods by implementing them in the controller. For example to replace the search:
 
 ``` ruby
