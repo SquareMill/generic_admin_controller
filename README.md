@@ -38,7 +38,7 @@ end
 
 ## Overriding
 
-Override views by creating a view directory for the controller and placing a partial or view file in the directory (`{index,new,edit,\_form,\_model\_table}.html.erb` etc.)
+Override views by creating a view directory for the controller and placing a partial or view file in the directory (`{index,new,edit,_form,_model_table}.html.erb` etc.)
 Override controller methods by implementing them in the controller. For example to replace the search:
 
 ``` ruby
