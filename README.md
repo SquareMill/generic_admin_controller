@@ -36,6 +36,20 @@ class Admin::MessagesController < Admin::GenericAdminController
 end
 ```
 
+## Javascript
+
+In order to have the search form submit automatically, you'll need to add a javascript file.
+
+You can add this to a manifest showing in your admin layout:
+```
+//= require generic_admin_controller/auto_submit_form
+```
+
+Or just add the file individually in the layout:
+```
+<%= javascript_include_tag "generic_admin_controller/auto_submit_form" %>
+```
+
 ## Overriding
 
 Override views by creating a view directory for the controller and placing a partial or view file in the directory (`{index,new,edit,_form,_model_table}.html.erb` etc.)
