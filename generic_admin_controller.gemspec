@@ -6,8 +6,8 @@ Gem::Specification.new do |gem|
   gem.version       = GenericAdminController::VERSION
   gem.authors       = ["Conor Hunt", "Esteban Pastorino", "Peter Jaros"]
   gem.email         = [""]
-  gem.description   = %q{Rails engine for creating customizable CMS's}
-  gem.summary       = %q{Rails engine for creating customizable CMS's}
+  gem.description   = %q{Rails gem for creating customizable CMS's}
+  gem.summary       = %q{Rails gem for creating customizable CMS's}
   gem.homepage      = "https://github.com/SquareMill/generic_admin_controller"
   gem.license       = "MIT"
 
